@@ -1,25 +1,30 @@
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Random;
+import java.util.Collections;
 
-public class Deck implements DeckActions{
+public class Deck {
+    private ArrayList<Card> cards;
 
-    private Objects/* you can change this to any type you want*/ myCards;
-    private int numCards;
+    public Deck() {
+        cards = new ArrayList<>();
+        String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
+        String[] values = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
 
+        for (String suit : suits) {
+            for (String value : values) {
+                cards.add(new Card(suit, value));
+            }
+        }
+    }
 
-    @Override
     public void shuffle() {
-
+        Collections.shuffle(cards);
     }
 
-    @Override
-    public Card dealNextCard() {
-        return null;
+    public Card deal() {
+        return cards.remove(0);
     }
 
-    @Override
-    public void printDeck(int numToPrint) {
-
+    public int size() {
+        return cards.size();
     }
 }
