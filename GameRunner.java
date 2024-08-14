@@ -1,19 +1,21 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.ArrayList;  // Import ArrayList class
+import java.util.Scanner;    // Import Scanner class
 
 public class GameRunner {
     private Deck deck; // The deck of cards
     private Player player; // The player
     private Player dealer; // The dealer
 
-    public GameRunner() { // Constructor to initialize the game
+    // Constructor to initialize the game
+    public GameRunner() { 
         deck = new Deck(); // Create a new deck
         deck.shuffle(); // Shuffle the deck
         player = new Player(100); // Create a new player with a starting balance of 100
         dealer = new Player(0); // Create a new dealer (no balance needed)
     }
 
-    public void playGame() { // Method to start and manage the game
+    // Method to start and manage the game
+    public void playGame() { 
         Scanner scanner = new Scanner(System.in); // Scanner to read user input
 
         while (true) { // Main game loop
@@ -28,13 +30,15 @@ public class GameRunner {
 
             player.placeBet(bet); // Place the bet
 
-            player.addCard(deck.deal()); // Deal two cards to the player
+            // Deal two cards to the player and dealer
+            player.addCard(deck.deal()); 
             player.addCard(deck.deal());
-            dealer.addCard(deck.deal()); // Deal two cards to the dealer
+            dealer.addCard(deck.deal()); 
             dealer.addCard(deck.deal());
 
-            System.out.println("Your hand: " + player.getHand() + " (value: " + player.getHandValue() + ")"); // Show the player's hand
-            System.out.println("Dealer's hand: [" + dealer.getHand().get(0) + ", ?]"); // Show one of the dealer's cards
+            // Show the player's hand and one of the dealer's cards
+            System.out.println("Your hand: " + player.getHand() + " (value: " + player.getHandValue() + ")"); 
+            System.out.println("Dealer's hand: [" + dealer.getHand().get(0) + ", ?]"); 
 
             boolean playerTurn = true; // Flag for the player's turn
             boolean doubledDown = false; // Flag for doubling down
@@ -67,7 +71,7 @@ public class GameRunner {
             }
 
             // Handle hitting or standing after doubling down
-            if (doubledDown) { // If the player doubled down
+            if (doubledDown) { 
                 playerTurn = true;
                 while (playerTurn && player.getHandValue() < 21) {
                     System.out.print("Do you want to (1) hit or (2) stand? ");
@@ -139,7 +143,8 @@ public class GameRunner {
         scanner.close(); // Close the scanner
     }
 
-    private void determineWinner(ArrayList<Card> hand, Player dealer) { // Method to determine the winner
+    // Method to determine the winner
+    private void determineWinner(ArrayList<Card> hand, Player dealer) { 
         int playerValue = calculateHandValue(hand); // Calculate the player's hand value
         int dealerValue = dealer.getHandValue(); // Get the dealer's hand value
 
@@ -155,7 +160,8 @@ public class GameRunner {
         }
     }
 
-    private int calculateHandValue(ArrayList<Card> hand) { // Method to calculate the hand value
+    // Method to calculate the hand value
+    private int calculateHandValue(ArrayList<Card> hand) { 
         int value = 0; // Initialize the value
         int aces = 0; // Initialize the number of aces
 
@@ -185,5 +191,11 @@ public class GameRunner {
     }
 }
 
-
+/*
+ * Summary:
+ * The GameRunner class is the main driver for a simple card game, likely a variant of Blackjack. It manages the deck, the player, and the dealer, 
+ * and orchestrates the flow of the game, including placing bets, dealing cards, handling player actions (hit, stand, double down, split), 
+ * and determining the winner based on the rules of the game. The game continues in a loop until the player decides to quit. 
+ * The class handles edge cases such as invalid bets, busts, and the complex logic required for splitting hands and doubling down.
+ */
 
